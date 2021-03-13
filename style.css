@@ -1,4 +1,57 @@
+body{
+    position: relative;
+    margin: 0%;
+    padding: 0%;
+}
+a{
+    color: black;
+}
+header{
+    position:fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 100;
+}
 nav .text-white{
     font-size: 2em;
-    margin: auto;
 }
+.fa-cart-plus{
+    color: white;
+    font-size: 1.5em;
+    margin-right: 5%;
+    margin-bottom: 10px;
+}
+main{
+    margin-top: 100px;
+    z-index: 99;
+}
+.card-img-top{
+    object-fit:cover;
+    height: 150px;
+    width: 250px;
+}
+img{
+    object-fit: cover;
+}
+.img2big{
+    object-fit: scale-down;
+    background-color: black;
+}
+.card{
+    width: 250px;
+    height: 150px;
+    border: none;
+}
+.card-body{
+    display: flex;
+    height: 50px;
+    padding-top: 5%;
+    justify-content: center;
+}
+.fa-plus{
+    font-size: 18px;
+    color: white;
+    margin-left: 3%;
+}
+
