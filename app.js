@@ -7,13 +7,6 @@ const cameraRoutes = require('./routes/camera');
 const teddyRoutes = require('./routes/teddy');
 const furnitureRoutes = require('./routes/furniture');
 
-/*
-
-const product = document.getElementsByClassName("product");
-product.innerHTML = Furniture;  
-
-*/
-
 const app = express();
 
 mongoose.connect(
