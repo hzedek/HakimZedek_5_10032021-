@@ -27,16 +27,11 @@ main{
     z-index: 99;
 }
 .card-img-top{
-    object-fit:cover;
     height: 150px;
     width: 250px;
 }
 img{
-    object-fit: cover;
-}
-.img2big{
     object-fit: scale-down;
-    background-color: black;
 }
 .card{
     width: 250px;
@@ -54,4 +49,3 @@ img{
     color: white;
     margin-left: 3%;
 }
-
