@@ -26,6 +26,9 @@ main{
     margin-top: 100px;
     z-index: 99;
 }
+button{
+    margin: 50px auto;
+}
 .card-img-top{
     height: 150px;
     width: 250px;
