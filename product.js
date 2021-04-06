@@ -42,26 +42,3 @@ function getOneProduct() {
         }
     )
 };
-
-
-/*
-let _id = [];
-let names = [];
-let description = [];
-let price = [];
-let imageUrl = [];
-let option0 = [];
-let option1 = [];
-let option2 = [];
-
-data.forEach((my_response,i) => {
-                 _id[i]=my_response._id;
-                 names[i]=my_response.name;
-                 description[i]=my_response.description;
-                 price[i]=my_response.price;
-                 imageUrl[i]=my_response.imageUrl;
-                 option0[i]=my_response.varnish[0];
-                 option1[i]=my_response.varnish[1];
-                 option2[i]=my_response.varnish[2];
-             });
-             */

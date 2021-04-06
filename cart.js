@@ -1,9 +1,13 @@
 let product_of_localStorage = JSON.parse(localStorage.getItem("localstorage_product"));
-console.log(product_of_localStorage);
+let cart_items = localStorage.getItem('product_of_localStorage');
+cart_items = JSON.parse(cart_items);
 
-const id_cart_html = document.getElementById('cart_produt_display')
+const id_cart_html = document.getElementById('cart_product_display');
+const btn_cart_html = document.getElementById('btn-primary');
+const totalArticle= document.getElementsByClassName('totalArticleHTML');
+const delete_all= document.getElementById('btn-delete');
 
-if (product_of_localStorage === null) {
+if (cart_items === null || cart_items.length === 0 ) {
     const empty_cart = `<div>
 <h2>Votre panier est vide</h2>
 </div>`;
@@ -11,23 +15,133 @@ if (product_of_localStorage === null) {
     id_cart_html.innerHTML = empty_cart;
 }
 else {
-    for (let k = 0; k < product_of_localStorage.length; k++) {
-        const element = product_of_localStorage[k];
-        const cart_display = `
-    <section class="container-fluid row">
-                <img class=" col-4" src="${element.image}" alt="${element.nom}">
-                <div class="col-4 my-auto text-center">
-                    <p> ${element.nom}</p>
-                    <p> option choisie : ${element.optionchoisie}</p>
-                </div>
-                <div class="my-auto mx-auto col-4"><i class="fas fa-chevron-up"></i>
-                    <p class="my-auto mx-auto item-amount">${element.quantity}</p><i class="fas fa-chevron-down"></i>
-                </div>
-            </section>
-            <section class="container-fluid row mt-5 mx-1">
-                <h4>total article : ${element.prix}<span class="cart-total"></span> €</h4>
-            </section>`;
-        id_cart_html.innerHTML += cart_display;
-    };
+    Object.values(cart_items).map(element => {
+        id_cart_html.innerHTML += `
+        <article class="container-fluid row">
+                    <img class="col-3" src="${element.image}" alt="${element.nom}">
+                    <h4 class="col-4 my-auto"> ${element.nom} en ${element.optionchoisie} </br> prix :${element.prix}€</h4>
+                    <div class="my-auto mx-auto col-3">
+                        <i class="fas fa-chevron-up up" data-id="${element.nom + element.optionchoisie}"></i>
+                        <p class="my-auto mx-auto item-amount">${element.quantity}</p>
+                        <i class="fas fa-chevron-down down" data-id="${element.nom + element.optionchoisie}"></i>
+                    </div>
+                    <button data-id="${element.nom + element.optionchoisie}" class="btn btn-danger my-auto mx-auto col-2 btn_delete">supprimer</button>
+                </article>
+                <article class="container-fluid row mt-5 mx-1">
+                    <h4>total article :<span class="totalArticleHTML"></span>€</h4>
+                </article>;`;
+    })
+        
+        this.articleTotalPrice(cart_items);
+        this.cartTotalPrice(cart_items);
+        this.removeItem(cart_items);
+        this.removeAllItems(cart_items);
+};
 
+let item = Object.values(cart_items);
+
+
+function articleTotalPrice(cart_items) {
+        let item = Object.values(cart_items);
+        
+        for (let x = 0; x < totalArticle.length; x++) {
+          let total_article = item[x].prix * item[x].quantity;
+            totalArticle[x].innerHTML = total_article;
+        }
+        };
+        
+
+function cartTotalPrice(cart_items) {
+    let item = Object.values(cart_items);
+const total = item.reduce((currentTotal, item) => {
+return (item.prix * item.quantity) + currentTotal
+},0);
+    btn_cart_html.innerHTML = ` 
+    <h2 class="mx-4 mt-2">total panier : ${total} €</h2>
+    <a href="survey.html"><button class="btn btn-primary mx-4 mt-2">Commander</button></a>`;
+};
+
+
+let up = document.querySelectorAll(".up");
+let amount_up = [...up];
+
+amount_up.forEach(button => {
+   
+    button.addEventListener("click", event=>{
+
+            let add_amount = event.target;
+            let id= add_amount.dataset.id
+            let new_amount = Object.values(cart_items).find(element => element.nom+element.optionchoisie === id);
+            new_amount.quantity = new_amount.quantity + 1;
+
+            localStorage.setItem("product_of_localStorage", JSON.stringify(cart_items));
+            this.cartTotalPrice(cart_items);
+            this.articleTotalPrice(cart_items);
+            add_amount.nextElementSibling.innerText= new_amount.quantity;
+});});
+
+let down = document.querySelectorAll(".down");
+let amount_down = [...down];
+
+amount_down.forEach(button => {
+   
+    button.addEventListener("click", event=>{
+
+            let remove_amount = event.target;
+            let id= remove_amount.dataset.id;
+            let new_amount = Object.values(cart_items).find(element => element.nom+element.optionchoisie === id);
+            if (new_amount.quantity >=2) {
+                new_amount.quantity = new_amount.quantity - 1;
+
+                localStorage.setItem("product_of_localStorage", JSON.stringify(cart_items));
+                this.cartTotalPrice(cart_items);
+                this.articleTotalPrice(cart_items);
+                remove_amount.previousElementSibling.innerText= new_amount.quantity;    
+            }
+            
+});});
+
+function removeItem(cart_items) {
+    
+let btn_deleteHTML = document.querySelectorAll('.btn_delete');
+let btn_delete = [...btn_deleteHTML];
+
+btn_delete.forEach(button => {
+
+    button.addEventListener("click", event=>{
+        let the_delete_button = event.target;
+        let id = the_delete_button.dataset.id;
+        deleteItem(id);
+        this.cartTotalPrice(cart_items);
+        localStorage.setItem("product_of_localStorage", JSON.stringify(item));
+        window.location.href= "cart.html";
+
+     });
+function deleteItem(id) {
+         item = item.filter(item => item.nom+item.optionchoisie != id)
+     };
+
+    });
+};
+
+function removeAllItems(cart_items) {
+    delete_all.innerHTML=`<boutton class="btn btn-danger my-5">Vider panier</boutton>`;
+    console.log(delete_all);
+    delete_all.addEventListener("click",event=>{
+        event.prevaultDefault;
+        localStorage.removeItem("product_of_localStorage");
+        window.location.href= "cart.html";
+        console.log(event);
+    })
 }
+
+
+
+
+
+
+
+
+/*
+  
+*/
