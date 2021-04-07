@@ -47,21 +47,3 @@ function setItems(productCart) {
     }
     localStorage.setItem("product_of_localStorage", JSON.stringify(cart_items));
 };
-
-
-
-/* if (product_of_localStorage) {
-        if (product_of_localStorage) {
-            product_of_localStorage.push(productCart);
-        localStorage.setItem("localstorage_product",JSON.stringify(product_of_localStorage));
-        } else {
-            console.error("again");
-        }
-
-    }
-    else {
-        product_of_localStorage =[];
-        product_of_localStorage.push(productCart);
-        localStorage.setItem("localstorage_product",JSON.stringify(product_of_localStorage));
-
-    } */
