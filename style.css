@@ -52,3 +52,30 @@ img{
     color: white;
     margin-left: 3%;
 }
+.item_amount{
+    margin-left: 2px;
+}
+
+.up, .down {
+    cursor: pointer;
+}
+.up:active, .down:active{
+    color: blue;
+}
+nav{
+    position: relative;
+}
+#cartnumber{
+    position: absolute;
+    border:2px solid white;
+    background-color: white;
+    border-radius:50%;
+    padding: 3px;
+    font-size: 0.6em;
+    color: black;
+    right:8px;
+    top: 0;
+}
+.center{
+   text-align: center;
+}

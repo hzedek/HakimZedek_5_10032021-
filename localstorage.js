@@ -17,10 +17,10 @@ my_response2.then(
                     nom: data.name,
                     prix: data.price / 100,
                     optionchoisie: option_chosen,
-                    quantity: 0
+                    quantity: 0,
+                    id: data._id
                 };
-                let product_of_localStorage = JSON.parse(localStorage.getItem("localstorage_product"));
-
+                let product = JSON.parse(localStorage.getItem("localstorage_product"));
                 setItems(productCart);
 
             });
@@ -29,21 +29,42 @@ my_response2.then(
     })
 
 function setItems(productCart) {
-
-    let cart_items = localStorage.getItem('product_of_localStorage');
+    
+    let cart_items = localStorage.getItem('product');
     cart_items = JSON.parse(cart_items);
 
     if (cart_items != null) {
-        if (cart_items[productCart.nom + productCart.optionchoisie]== undefined) 
-        {   cart_items={...cart_items,[productCart.nom + productCart.optionchoisie]:productCart
+        if (cart_items[productCart.nom + productCart.optionchoisie] == undefined) {
+            cart_items = {
+                ...cart_items, [productCart.nom + productCart.optionchoisie]: productCart
             }
         }
-      cart_items[productCart.nom + productCart.optionchoisie].quantity += 1;
+        cart_items[productCart.nom + productCart.optionchoisie].quantity += 1;
     }
 
     else {
         productCart.quantity = 1;
-        cart_items = { [productCart.nom+ productCart.optionchoisie]: productCart };
+        cart_items = { [productCart.nom + productCart.optionchoisie]: productCart };
     }
-    localStorage.setItem("product_of_localStorage", JSON.stringify(cart_items));
+    localStorage.setItem("product", JSON.stringify(cart_items));
+    number_article(cart_items)
+};
+
+function number_article(cart_items) {
+    
+    if (cart_items === null || cart_items === undefined) {
+        let number_product = [0];
+        localStorage.setItem("number_product", JSON.stringify(number_product));
+        theNumbers.innerHTML = number_product; 
+
+    }
+    else {
+        let item = Object.values(cart_items);
+        number_products= item.reduce((myNumber, item)=> {
+                return myNumber + item.quantity},0);
+        let number_product=[];
+        number_product.push(number_products)
+        localStorage.setItem("number_product", JSON.stringify(number_product));
+        theNumbers.innerHTML = number_product; 
+}
 };
