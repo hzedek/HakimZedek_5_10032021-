@@ -16,7 +16,7 @@ function getOneProduct() {
         async data => {
             const myproducts = data.json();
             await myproducts.then(data => {
-                //----------------affichage d'un produit---------------            
+//----------------affichage d'un produit---------------            
                  productDisplay = `
                                         <img class="col-md-6 scaledown" height="300" width="400" src="${data.imageUrl}" alt="${data.name}">
                                             <div class="col-md-6">
@@ -29,7 +29,7 @@ function getOneProduct() {
                                                 </form>                                            
                  </div>`;
                 product.innerHTML = productDisplay;
-                //----------------affichage des options---------------                 
+//----------------affichage des options---------------                 
                 for (let i = 0; i < data.varnish.length; i++) {
                      option_display =
                         `<option value="${data.varnish[i]}">${data.varnish[i]}

@@ -27,7 +27,7 @@ my_response2.then(
 
         })
     })
-
+//creation du localstorage pour les produits
 function setItems(productCart) {
     
     let cart_items = localStorage.getItem('product');
@@ -49,7 +49,7 @@ function setItems(productCart) {
     localStorage.setItem("product", JSON.stringify(cart_items));
     number_article(cart_items)
 };
-
+//fonction affichage et incrémentation du nombre d'article
 function number_article(cart_items) {
     
     if (cart_items === null || cart_items === undefined) {
