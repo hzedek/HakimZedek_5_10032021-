@@ -6,9 +6,9 @@ my_response2.then(
     async data => {
         const the_localStorage = data.json();
         await the_localStorage.then(data => {
-
+            
             const id_btn = document.getElementById("btn");
-            id_btn.addEventListener("click", (event) => {
+           id_btn.addEventListener("click", (event) => {
                 const id_form = document.getElementById("option_product");
                 const option_chosen = id_form.value;
 
@@ -27,7 +27,7 @@ my_response2.then(
 
         })
     })
-//creation du localstorage pour les produits
+    //creation du localstorage pour les produits
 function setItems(productCart) {
     
     let cart_items = localStorage.getItem('product');
@@ -51,20 +51,12 @@ function setItems(productCart) {
 };
 //fonction affichage et incrémentation du nombre d'article
 function number_article(cart_items) {
-    
-    if (cart_items === null || cart_items === undefined) {
-        let number_product = [0];
-        localStorage.setItem("number_product", JSON.stringify(number_product));
-        theNumbers.innerHTML = number_product; 
-
-    }
-    else {
-        let item = Object.values(cart_items);
+     let item = Object.values(cart_items);
         number_products= item.reduce((myNumber, item)=> {
                 return myNumber + item.quantity},0);
         let number_product=[];
         number_product.push(number_products)
         localStorage.setItem("number_product", JSON.stringify(number_product));
         theNumbers.innerHTML = number_product; 
-}
+
 };

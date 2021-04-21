@@ -6,7 +6,6 @@ const theNumbers = document.getElementById("cartnumber");
 const id_cart_html = document.getElementById('cart_product_display');
 const btn_cart_html = document.getElementById('btn-primary');
 const totalArticle = document.getElementsByClassName('totalArticleHTML');
-const delete_all = document.getElementById('btn-delete');
 
 //AFFICHAGE SI PANIER VIDE
 if (cart_items === null || cart_items.length === 0) {
@@ -20,20 +19,18 @@ if (cart_items === null || cart_items.length === 0) {
 //AFFICHAGE DU PANIER SI UN ARTICLE OU PLUS
 else {
     Object.values(cart_items).map(element => {
-        id_cart_html.innerHTML += `
-        <article class="container-fluid row">
-                    <img class="col-3" src="${element.image}" alt="${element.nom}">
-                    <h4 class="col-4 my-auto"> ${element.nom} en ${element.optionchoisie} </br> prix :${element.prix}€</h4>
-                    <div class="my-auto mx-auto col-3">
-                        <i class="fas fa-chevron-up up" data-id="${element.nom + element.optionchoisie}"></i>
-                        <p class="my-auto item_amount">${element.quantity}</p>
-                        <i class="fas fa-chevron-down down" data-id="${element.nom + element.optionchoisie}"></i>
-                    </div>
-                    <button data-id="${element.nom + element.optionchoisie}" class="btn btn-danger my-auto mx-auto col-2 btn_delete">supprimer</button>
-                </article>
-                <article class="container-fluid row mt-5 mx-1">
-                    <h4>total article :<span class="totalArticleHTML"></span>€</h4>
-                </article>;`;
+        id_cart_html.innerHTML += `<article class="container-fluid row my-2 product">
+        <img class=" col-md-3" src="${element.image}" alt="${element.nom}">
+        <p class="col-md-2 my-auto center"><strong> ${element.nom} en ${element.optionchoisie} </strong></p>
+        <p class=" col-md-1 my-auto">${element.prix}€</p>
+        <div class="my-auto mx-auto col-md-2 row">
+            <i class="fas fa-arrow-left down" data-id="${element.nom + element.optionchoisie}"></i>
+            <p class="my-auto item_amount mx-3">${element.quantity}</p>
+            <i class="fas fa-arrow-right up" data-id="${element.nom + element.optionchoisie}"></i>
+        </div>
+        <p class="col-md-2 my-auto"> <span class="totalArticleHTML"></span>€</p>
+        <button data-id="${element.nom + element.optionchoisie}" class="btn btn-danger my-auto mx-auto col-md-2 btn_delete">supprimer</button>
+    </article>`;
     })
     this.articleTotalPrice(cart_items);
     this.cartTotalPrice(cart_items);
@@ -59,8 +56,10 @@ function cartTotalPrice(cart_items) {
         return (item.prix * item.quantity) + currentTotal
     }, 0);
     btn_cart_html.innerHTML = ` 
-    <h2 class="mx-4 mt-2">total panier : ${total} €</h2>
-    <a href="survey.html"><button class="btn btn-primary mx-4 mt-2">Commander</button></a>`;
+    
+    <h2 class=" mx-4 mt-1">Total panier : ${total} €</h2>
+    <a href="survey.html"><button class="btn btn-primary mx-4 mt-2">Commander</button></a>
+    <button class="btn btn-danger mx-4 mt-2" id="btn-delete">Vider panier</button>`;
     let cart_total = [];
     cart_total.push(total)
     localStorage.setItem("cart_total", JSON.stringify(cart_total));
@@ -83,7 +82,7 @@ amount_up.forEach(button => {
         this.articleTotalPrice(cart_items);
         this.cartTotalPrice(cart_items);
         this.number_article(cart_items);
-        add_amount.nextElementSibling.innerText = new_amount.quantity;
+        add_amount.previousElementSibling.innerText = new_amount.quantity;
 
 
     });
@@ -107,7 +106,7 @@ amount_down.forEach(button => {
             this.number_article(cart_items);
             this.articleTotalPrice(cart_items);
             this.cartTotalPrice(cart_items);
-            remove_amount.previousElementSibling.innerText = new_amount.quantity;
+            remove_amount.nextElementSibling.innerText = new_amount.quantity;
         }
 
     });
@@ -139,9 +138,10 @@ function removeItem(cart_items) {
 };
 //FONCTION QUI VIDE LE PANIER
 function removeAllItems(cart_items) {
-    delete_all.innerHTML = `<boutton class="btn btn-danger my-5">Vider panier</boutton>`;
-    delete_all.addEventListener("click", event => {
-        event.prevaultDefault;
+    const delete_all = document.getElementById('btn-delete');
+
+    delete_all.addEventListener("click", e => {
+        e.prevaultDefault;
         localStorage.removeItem("product");
         localStorage.removeItem("number_products");
         window.location.href = "cart.html";
@@ -154,7 +154,6 @@ function number_article(cart_items) {
         let number_product = [0];
         localStorage.setItem("number_product", JSON.stringify(number_product));
         theNumbers.innerHTML = number_product;
-
     }
     else {
         let item = Object.values(cart_items);
@@ -167,3 +166,4 @@ function number_article(cart_items) {
         theNumbers.innerHTML = number_product;
     }
 };
+

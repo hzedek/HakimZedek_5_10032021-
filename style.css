@@ -1,7 +1,5 @@
 body{
-    position: relative;
-    margin: 0%;
-    padding: 0%;
+    position: relative;    
 }
 a{
     color: black;
@@ -26,15 +24,13 @@ main{
     margin-top: 100px;
     z-index: 99;
 }
-button{
-    margin: 50px auto;
-}
+
 .card-img-top{
     height: 150px;
     width: 250px;
 }
 img{
-    object-fit: scale-down;
+    object-fit:cover;
 }
 .card{
     width: 250px;
@@ -47,23 +43,16 @@ img{
     padding-top: 5%;
     justify-content: center;
 }
-.fa-plus{
-    font-size: 18px;
-    color: white;
-    margin-left: 3%;
-}
-.item_amount{
-    margin-left: 2px;
-}
 
 .up, .down {
     cursor: pointer;
+    margin-top: 5px;
 }
 .up:active, .down:active{
     color: blue;
 }
 nav{
-    position: relative;
+    position: relative; 
 }
 #cartnumber{
     position: absolute;
@@ -78,4 +67,22 @@ nav{
 }
 .center{
    text-align: center;
+   
 }
+#errors{
+    color: tomato;
+    text-align: center;
+}
+.btnCart{
+    display: flex;
+    
+}
+
+.product{
+    margin: 0%;
+    padding: 0%;
+    padding-bottom:1% ;
+    background-color:rgba(211, 211, 211, 0.329);
+    padding-top: 1%;
+}
+

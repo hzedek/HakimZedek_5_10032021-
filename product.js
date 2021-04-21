@@ -26,7 +26,8 @@ function getOneProduct() {
                                                 <form><select name="option_product" id="option_product">
                                                     <label for="option_product"></label>
                                                     </select>
-                                                </form>                                            
+                                                </form> <br>
+                                                <boutton id="btn" class="btn btn-primary my-5">Ajouter au panier</boutton>                                         
                  </div>`;
                 product.innerHTML = productDisplay;
 //----------------affichage des options---------------                 
