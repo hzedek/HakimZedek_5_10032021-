@@ -21,6 +21,7 @@ let storage_items = Object.values(cart_items);
                 my_contact=JSON.parse(my_contact);
 //AFFICHAGE DU MESSAGE D'ERREUR SI FORMULAIRE INCOMPLET                
                 let error;
+                const my_regex=/[a-zA-Z]+/;
 
                 if (my_contact.email==="") {
                     error = "Veuillez renseigner votre email";
@@ -41,6 +42,16 @@ let storage_items = Object.values(cart_items);
                 if (my_contact.firstName==="") {
                     error = "Veuillez renseigner votre prenom";
                 }
+                if(my_regex.test(my_contact.city)===false){
+                    error = "ville incorrecte";
+                }
+                if(my_regex.test(my_contact.lastName)===false){
+                    error = "nom incorrecte";
+                }
+                if (my_regex.test(my_contact.firstName)===false) {
+                    error = "prenom incorrecte";
+                }
+                
 
                 if (error) {
                     event.preventDefault();
@@ -91,4 +102,3 @@ let storage_items = Object.values(cart_items);
             }
         }
         });
-
