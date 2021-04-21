@@ -7,7 +7,7 @@ my_response2.then(
         const the_localStorage = data.json();
         await the_localStorage.then(data => {
             
-            const id_btn = document.getElementById("btn");
+            let id_btn = document.getElementById("btn");
            id_btn.addEventListener("click", (event) => {
                 const id_form = document.getElementById("option_product");
                 const option_chosen = id_form.value;
@@ -58,5 +58,4 @@ function number_article(cart_items) {
         number_product.push(number_products)
         localStorage.setItem("number_product", JSON.stringify(number_product));
         theNumbers.innerHTML = number_product; 
-
 };
