@@ -18,7 +18,7 @@ function getOneProduct() {
             await myproducts.then(data => {
 //----------------affichage d'un produit---------------            
                  productDisplay = `
-                                        <img class="col-md-6 scaledown" height="300" width="400" src="${data.imageUrl}" alt="${data.name}">
+                                        <img style="object-fit: cover;" class="col-md-6 scaledown" height="300" width="400" src="${data.imageUrl}" alt="${data.name}">
                                             <div class="col-md-6">
                                                 <h2 class="text-center">${data.name}</h2>
                                                 <p class="text-center">${data.description}</p>
